@@ -48,6 +48,18 @@ function searchCity(city) {
   axios.get(apiUrl).then(refreshWeather);
 }
 
+function getForecast(city) {
+  let apiKey = fobd5f34d0a71b340a77389t18db1bc0;
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = "";
+  let forecast = response.data.daily;
+}
+
 function handleSearchSubmit(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-form-input");
@@ -58,3 +70,4 @@ let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("San Diego");
+getForecast("San Diego");
